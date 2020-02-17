@@ -1,0 +1,29 @@
+Course Name: ECE372A <br>
+Author: <br>
+NetID: <br>
+Date: <br>
+Project Name: Lab3
+
+# Description
+In this lab, you will interface with an LCD to display various characters. You will need to create a microsecond delay that will work up to at least 2000 microseconds using timer 1. Using bit shifting and masking you will send commands to the LCD.
+
+# Instructions
+Examine comments in lcd.cpp, main.cpp, and timer.cpp and complete the described functions. You will need to create a circuit using your breadboard, jumper wires and LCD. **You will need to solder the LCD** - this is done as part of the **soldering workshop**. Please attend one as soon as possible if you haven't already.
+
+# Requirements
+## Overall
+1. The project must follow good coding practices and be well commented.
+2. Arduino libraries are not allowed at all for this lab with the exception of debug functionality using Serial.println.
+3. The LCD must have a flashing cursor at the end of the printed line.
+
+## lcd.cpp
+1. All functions provided must be used in the implementation of the LCD interface according to their descriptions
+2. PORTA0, PORTA1, PORTA2, and PORTA3 must be used for the data pins on the LCD with PORTA0 corresponding to the least significant bit
+3. PORTB4 and PORTB6 must be used for the enable pin and RS pin respectively.
+4. When four bits need to be assigned to PORTA, it must be done in **one line of code**. There are times where you need to send four bits twice, in this case, you need two lines of code.
+
+## timer.cpp
+1. Implement a precise microsecond timer using timer 0.
+
+## main.cpp
+1. main.cpp can and should remain as it is as you implement the related LCD functions.
