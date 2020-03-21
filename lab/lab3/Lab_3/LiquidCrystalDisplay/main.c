@@ -12,9 +12,6 @@
 #define F_CPU 16000000UL
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
-
-#include <util/delay.h>
 
 #include "timer.h"
 #include "LiquidCrystal.h"
@@ -25,15 +22,18 @@ int main(void)
 {	
 	DDRB |= _BV(DDB7);
 	
+	TIMER1_init();
 	LCD_init();
-	LCD_moveCursor(0, 4);
-	LCD_writeString("COVID19");
+	//LCD_moveCursor(0, 0);
+	//LCD_writeString("Hello!");
+	
+	LCD_moveCursor(0, 0);
+	LCD_writeString("My name is: ");
+	LCD_moveCursor(1, 0);
+	LCD_writeString("Shengrui Zhang");
 	
     while (1) 
     {
-		PORTB |= _BV(PB7);
-		_delay_ms(500);
-		PORTB &= ~(_BV(PB7));
-		_delay_ms(500);
+		
     }
 }
