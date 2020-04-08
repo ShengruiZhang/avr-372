@@ -9,7 +9,7 @@
 
 #include "adc.h"
 
-void init_ADC_5() {
+void init_ADC_0() {
 	
 	// Set ADC reference voltage same as AVcc
 	ADMUX |= _BV(REFS0);

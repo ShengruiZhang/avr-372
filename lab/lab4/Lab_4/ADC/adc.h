@@ -9,7 +9,7 @@
 
 typedef unsigned int uint;
 
-void init_ADC_5();
+void init_ADC_0();
 void ADC_Start();
 
 #endif /* ADC_H_ */
