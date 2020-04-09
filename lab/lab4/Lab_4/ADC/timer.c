@@ -16,6 +16,7 @@ prescaler 1024 -> 65535 counts -> 4.2 s
 #include <avr/io.h>
 
 #include "timer.h"
+#include "adc.h"
 
 /*	This Function has been proved to be working */
 void init_timer_0(enum TimerMode _mode_Timer0) {
@@ -174,7 +175,7 @@ void init_timer_3(enum TimerMode _mode_timer3) {
 		TCCR3A |= _BV(COM3B1);
 		
 		// Define Top to MAX
-		ICR3 = Timer3_TOP;;
+		ICR3 = Timer3_TOP;
 		// 1FFF -> 8191
 		
 		OCR3A = 125;
@@ -195,8 +196,35 @@ void init_timer_3(enum TimerMode _mode_timer3) {
 	}
 }
 
+/*	This Function has been proved to be working */ 
+void Timer3_Toggle(uint _On_timer3) {
+	if (_On_timer3 == 0)
+	{
+		// Turn off timer
+		// Turn off ADC
+		ADCSRA &= ~_BV(ADEN);
+		
+		// Disconnect waveform gen.
+		TCCR3A &= ~_BV(COM3A1);
+		TCCR3A &= ~_BV(COM3A0);
+		
+		// Set Duty Cycle to 0
+		OCR3A = 0;
+	}
+	else if (_On_timer3 == 1)
+	{
+		// Turn on timer
+		// Set waveform gen.
+		TCCR3A |= _BV(COM3A1);
+		
+		// Turn on ADC
+		ADCSRA |= _BV(ADEN);
+		ADC_Start();
+	}
+}
+
 /*	This Function has been proved to be working */
-void Timer_0_delay(uint _Lenght_timer0) {
+void Timer_0_delay_ms(uint _Lenght_timer0) {
 	
 	// Clear match flag
 	TIFR0 |= _BV(OCF0A);
@@ -209,9 +237,9 @@ void Timer_0_delay(uint _Lenght_timer0) {
 	TCCR0B |= _BV(CS01);
 	TCCR0B |= _BV(CS00);
 	
-	for(uint _aux = 1; _aux <= _Lenght_timer0; ++_aux) {
+	for (uint _aux = 1; _aux <= _Lenght_timer0; ++_aux) {
 		// Wait for 1 match occur, 1 ms resolution
-		while( !(TIFR0 & (1 << OCF0A)) );
+		while ( !(TIFR0 & (1 << OCF0A)) );
 		TIFR0 |= _BV(OCF0A);
 	}
 	

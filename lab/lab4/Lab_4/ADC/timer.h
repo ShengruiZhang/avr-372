@@ -22,7 +22,9 @@ void init_timer_0(enum TimerMode _mode_Timer0);
 void init_timer_1(enum TimerMode _mode_timer1);
 void init_timer_3(enum TimerMode _mode_timer3);
 
-void Timer_0_delay(uint _Lenght_timer0);
+void Timer3_Toggle(uint _On_timer3);
+
+void Timer_0_delay_ms(uint _Lenght_timer0);
 
 void Timer_1_SetWidth(uint _Width_timer1);
 void Timer_3_SetWidth(uint _Width_timer3);

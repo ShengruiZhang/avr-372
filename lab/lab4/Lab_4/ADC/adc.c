@@ -13,9 +13,9 @@ void init_ADC_0() {
 	
 	// Set ADC reference voltage same as AVcc
 	ADMUX |= _BV(REFS0);
-	
-	// Set ADC5 active -> 000101
-	//ADMUX |= _BV(MUX2) | _BV(MUX0);
+
+	// ADC input pin
+	DDRF &= ~_BV(PF0);
 	
 	// Set ADC0 active -> 000000
 	ADMUX &= ~_BV(MUX0);
